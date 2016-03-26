@@ -1,0 +1,237 @@
+<!--
+Course No: Prog 3180
+Course Name: Programming with Mobile Applications 1
+Assignment No: 3
+Created By: Nadia Siraj
+Revision History:03/21/2016
+-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+        <title>NS Feedback A3</title>
+        <link rel="stylesheet" type="text/css" href="css/lib/jquery.mobile-1.4.5.css">
+        <link rel="stylesheet" type="text/css" href="css/nsmystyle.css">
+        <script src="js/lib/jquery-2.1.4.js"></script>
+        <script src="js/lib/jquery.mobile-1.4.5.js"></script>
+        <script src="js/lib/jquery.validate.js"></script>
+        <script src="js/nsdatabase.js"></script>
+        <script src="js/nsfeedbackDAL.js"></script>
+        <script src="js/nsglobal.js"></script>
+        <script src="js/nsutil.js"></script>
+        <script src="js/nsfacade.js"></script>
+    </head>
+    <body>
+
+        <!--PAGE 1 : HOME PAGE-->
+        <div data-role="page" id="nsHomePage">
+            <header data-role="header" data-theme="b" data-position="fixed">
+                <h1>NS Feedback A3</h1>
+                <div data-role="navbar" data-iconpos="top">
+
+                    <ul>
+                        <li><a href="#nsHomePage" data-icon="home" data-theme="a" class="ui-btn-active ui-state-persist">Home</a></li>
+                        <li><a href="#nsAddFeedbackPage" data-icon="plus" data-theme="a">Add</a></li>
+                        <li><a href="#nsViewFeedbackPage" data-icon="grid" data-theme="a">Reviews</a></li>
+                        <li><a href="#nsSettingsPage" data-icon="gear" data-theme="a">Settings</a></li>
+                    </ul>
+                </div>
+            </header>
+            <section data-role="content">
+                <h2>Nadia Siraj's Feedback A3 App</h2>
+                <p> Welcome to the Nadia Siraj's Feedback A1 app. A prototype designed for the mobile programming class. This is the first iteration of the app to keep track of different places I visited along with my reviews. </p>
+                <p align="center">
+                    <img src="images/ns-icon.png" width="50%" height="" alt="Cat">
+                </p>
+                <a href="tel:519-748-5220" data-role="button" data-icon="plus">Call: 519 748 5220</a>
+                <a href="mailto:nsiraj-cc@conestogac.on.ca" data-role="button" data-icon="plus">nsiraj-cc@conestogac.on.ca</a>
+                <p>Website:</p>
+                <a href="http://www.conestogac.on.ca" data-role="button" data-icon="plus">Conestoga College</a>
+            </section>
+            <footer data-role="footer" data-theme="b" data-position="fixed">
+                <h1> &copy; 2016 Nadia Siraj </h1>
+            </footer>
+        </div>
+
+        <!--PAGE 2 : ADD PAGE-->
+        <div data-role="page" id="nsAddFeedbackPage">
+            <header data-role="header" data-theme="b" data-position="fixed">
+                <h1>Add a Feedback </h1>
+                <div data-role="navbar" data-iconpos="top">
+                    <ul>
+                        <li><a href="#nsHomePage" data-icon="home" data-theme="a">Home</a></li>
+                        <li><a href="#nsAddFeedbackPage" data-icon="plus" class="ui-btn-active ui-state-persist" data-theme="a">Add</a></li>
+                        <li><a href="#nsViewFeedbackPage" data-icon="grid" data-theme="a">Reviews</a></li>
+                        <li><a href="#nsSettingsPage" data-icon="gear" data-theme="a">Settings</a></li>
+                    </ul>
+                </div>
+            </header>
+            <section data-role="content">
+                <form id="nsAddForm" name="nsAddForm">
+                    <p> Business Name:</p>
+                    <input id="txtName" name="txtName" value="" type="text" class="required">
+                    <p> Type:</p>
+
+
+                    <select id="cmbType" name="cmbType" value="">
+
+
+
+                    </select>
+                    <p> Reviewer Email:</p>
+                    <input id="txtEmail" name="txtEmail" type="text" class="required">
+                    <p> Reviewer Comments:</p>
+                    <textarea name="comments" id="comments" ></textarea>
+                    <p> Review Date:</p>
+                    <input id="txtDate" name="txtReview" type="date" class="required"><br>
+                    <br> <label for="chkRate"> Do you want to add ratings?</label>
+                    <input type="checkbox" id="chkRate" name="rate">
+                    <div id="div1" style="display: none">
+                        <label for="txtQuality"> Food Quality (0-5):</label>
+                        <input id="txtQuality" name="txtQuality" type="number" value="0">
+                        <label for="txtService"> Service (0-5):</label>
+                        <input id="txtService" name="txtService" type="number" value="0">
+                        <label for="txtValue"> Value (0-5):</label>
+                        <input id="txtValue" name="txtValue" type="number"value="0">
+                        <label for="txtRatings"> Overall Ratings(1-100):</label>
+                        <input id="txtRatings" name="txtRatings" type="text" placeholder="Overall Rating (calculated)"value="" disabled>
+                    </div>
+                    <br>
+                    <a href="#" data-role="button" name="save" style="background-color:#0088bb;color:white" id="btnSave" data-inline="true">Save</a>
+                </form>
+            </section>
+            <footer data-role="footer" data-theme="b" data-position="fixed">
+                <h1> &copy; 2016 Nadia Siraj </h1>
+            </footer>
+        </div>
+
+        <!--PAGE 3 : REVIEW PAGE-->
+        <div data-role="page" id="nsViewFeedbackPage">
+            <header data-role="header" data-theme="b" data-position="fixed">
+                <h1>List of Reviews</h1>
+                <div data-role="navbar" data-iconpos="top">
+                    <ul>
+                        <li><a href="#nsHomePage" data-icon="home" data-theme="a">Home</a></li>
+                        <li><a href="#nsAddFeedbackPage" data-icon="plus" data-theme="a">Add</a></li>
+                        <li><a href="#nsViewFeedbackPage" data-icon="grid" class="ui-btn-active ui-state-persist" data-theme="a">Reviews</a></li>
+                        <li><a href="#nsSettingsPage" data-icon="gear" data-theme="a">Settings</a></li>
+                    </ul>
+                </div>
+            </header>
+            <section data-role="content">
+
+                <ul id="lvAll" data-role="listview" class="ui-listview-inset">
+
+                <!--<ul id="nsFeedbackList" data-role="listview" data-inset="true">-->
+                    <!---->
+                    <!---->
+                    <!--<li data-icon="false">-->
+                        <!--<a href="#nsEditFeedbackPage" data-theme="a">-->
+                            <!--<h3>Business Name: Canadian Tire</h3>-->
+                            <!--<p>Reviewer Email: ns17@gmail.com</p>-->
+                            <!--<p>Comments:Good Service</p>-->
+                            <!--<p>Overall Ratings: 75%</p>-->
+                        <!--</a>-->
+                    <!--</li>-->
+                    <!--<li data-icon="false">-->
+                        <!--<a href="#nsEditFeedbackPage" data-theme="a">-->
+                            <!--<h3>Business Name: Walmart</h3>-->
+                            <!--<p>Reviewer Email: lgha5@yahoo.com</p>-->
+                            <!--<p>Comments: Knowledgeable staff</p>-->
+                            <!--<p>Overall Ratings: 84%</p>-->
+                        <!--</a>-->
+                    <!--</li>-->
+                </ul>
+            </section>
+            <footer data-role="footer" data-theme="b" data-position="fixed">
+                <h1> &copy; 2016 Nadia Siraj </h1>
+            </footer>
+        </div>
+
+        <!--PAGE 4 : MODIFY PAGE-->
+        <div data-role="page" id="nsEditFeedbackPage">
+            <header data-role="header" data-theme="b" data-position="fixed">
+                <h1>Modify Feedback </h1>
+                <div data-role="navbar" data-iconpos="top">
+                    <ul>
+                        <li><a href="#nsHomePage" data-icon="home" data-theme="a">Home</a></li>
+                        <li><a href="#nsAddFeedbackPage" data-icon="plus" data-theme="a">Add</a></li>
+                        <li><a href="#nsViewFeedbackPage" data-icon="grid" class="ui-btn-active ui-state-persist" data-theme="a">Reviews</a></li>
+                        <li><a href="#nsSettingsPage" data-icon="gear" data-theme="a">Settings</a></li>
+                    </ul>
+                </div>
+            </header>
+            <section data-role="content">
+                <form id="nsModifyForm">
+                    <p> Business Name:</p>
+                    <input id="txtBusinessName" name="txtName" type="text" class="required">
+                    <p> Type:</p>
+                    <select id="cmbType1">
+                        <option value="1">Canadian</option>
+                        <option value="2">Asian</option>
+                        <option value="3" selected>Other</option>
+                    </select>
+                    <p> Reviewer Email:</p>
+                    <input id="txtReviewerEmail" name="txtEmail" type="text" class="required">
+                    <p> Reviewer Comments:</p>
+                    <textarea id="txtReviewerComments" name="comments"></textarea>
+                    <p> Review Date:</p>
+                    <input id="txtReviewDate" name="txtReview" type="date" class="required"><br>
+                    <br> <label for="chkHasRating"> Do you want to add ratings?</label>
+                    <input type="checkbox" id="chkHasRating" name="rate" >
+                    <div id="rating_div" style="display: none">
+                        <label for="txtQuality1"> Food Quality (0-5):</label>
+                        <input id="txtQuality1" name="txtQuality" type="number" value="0">
+                        <label for="txtService1"> Service (0-5):</label>
+                        <input id="txtService1" name="txtService" type="number" value="0">
+                        <label for="txtValue1"> Value (0-5):</label>
+                        <input id="txtValue1" name="txtValue" type="number" value="0">
+                        <label for="txtRatings1"> Overall Ratings(1-100):</label>
+                        <input id="txtRatings1" name="ratings" type="text" placeholder="Overall Rating (calculated)" value="" disabled>
+                    </div>
+                    <br>
+                    <!--group buttons-->
+                    <div data-role="controlgroup" data-type="horizontal">
+                        <a href="#" data-role="button" id="btnCancel" name="cancel" style="background-color:yellow;">Cancel</a>
+                        <a href="#" data-role="button" id="btnDelete" name="delete" style="background-color:black;color:white;">Delete</a>
+                        <a href="#" data-role="button" id="btnUpdate" name="update" style="background-color:blue;color:white;">Update</a>
+                    </div>
+                </form>
+            </section>
+            <footer data-role="footer" data-theme="b" data-position="fixed">
+                <h1> &copy; 2016 Nadia Siraj </h1>
+            </footer>
+        </div>
+
+        <!--PAGE 5 : SETTING PAGE-->
+        <div data-role="page" id="nsSettingsPage">
+            <header data-role="header" data-theme="b" data-position="fixed">
+                <h1>Settings</h1>
+                <div data-role="navbar" data-iconpos="top">
+                    <ul>
+                        <li><a href="#nsHomePage" data-icon="home" data-theme="a">Home</a></li>
+                        <li><a href="#nsAddFeedbackPage" data-icon="plus" data-theme="a">Add</a></li>
+                        <li><a href="#nsViewFeedbackPage" data-icon="grid" data-theme="a">Reviews</a></li>
+                        <li><a href="#nsSettingsPage" data-icon="gear" class="ui-btn-active ui-state-persist" data-theme="a">Settings</a></li>
+                    </ul>
+                </div>
+            </header>
+            <section data-role="content">
+                <form id="nsSettingForm">
+                    <p>Default Reviewer Email:</p>
+                    <input id="txtDefaultEmail" name="txtDefaultEmail" type="text"
+                           value="nsiraj-cc@conestogac.on.ca">
+
+<a href="#" id="btnDefaultSave" data-role="button"name="btnDefaultSave"
+   style= "background-color:#22aadd; color: white;">Save Defaults</a>
+
+     <a href="#" id="btnClearDatabase" data-role="button" data-theme="b" >Clear Database</a>
+
+                </form>
+            </section>
+            <footer data-role="footer" data-theme="b" data-position="fixed">
+                <h1> &copy; 2016 Nadia Siraj </h1>
+            </footer>
+        </div>
+    </body>
+</html>
